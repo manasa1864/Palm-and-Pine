@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cart Summary</title>
+  <style>
+    body {
+  font-family: Times New Roman, serif;
+  background-color: #fdfefd;
+  padding: 40px;
+  background-image: url('paying.jpg'); 
+  background-size: 1500px 1500px; 
+  background-position: center;
+  margin: 10px;
+  padding: 0;
+}
+
+
+    .container 
+    {
+      max-width: 1000px;
+      margin: auto;
+      background-color: #fdfefd;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 
+    {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #000;
+    }
+
+    .cart-item 
+    {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .item-details {
+      flex: 1;
+    }
+
+    .item-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .item-quantity,
+    .item-price {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .item-total {
+      font-weight: bold;
+      color: #222;
+      min-width: 100px;
+      text-align: right;
+    }
+
+    .total-section {
+      text-align: right;
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .btn-style 
+    {
+      flex: 1;
+      min-width: 140px;
+      padding: 12px;
+      border: none;
+      background-color: #46260d;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      appearance: none;
+      text-align: center;
+    }
+
+    .btn-style::after 
+    {
+      padding-right: 10px;
+    }
+
+    .btn-style:hover 
+    {
+      background-color: #a89586;
+    }
+
+    @media (max-width: 600px) {
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .item-total {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Cart</h1>
+    <div id="cart-items"></div>
+
+    <div class="total-section">
+      Total: ₹<span id="total-amount">0</span>
+    </div>
+
+    <div class="buttons">
+        <select id="section-select" class="btn-style" onchange="goToSection()">
+            <option value="">Continue Shopping</option>
+            <option value="starters.html">Starters</option>
+            <option value="drinks.html">Drinks</option>
+            <option value="indian.html">Indian Dishes</option>
+            <option value="international.html">International Dishes</option>
+            <option value="desserts.html">Desserts</option>
+            <option value="sides.html">Sides</option>
+          </select>
+          
+          <button class="btn-style" onclick="proceedToBilling()">Go to Payment</button>
+          <button class="btn-style" onclick="clearCart()">Clear Cart</button>
+
+    </div>
+  </div>
+
+  <script>
+    
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    if (cartItems.length === 0) {
+      document.getElementById('cart-items').innerHTML = '<p>Your cart is empty.</p>';
+      document.querySelector('.total-section').style.display = 'none';
+    }
+    if (cartItems.length > 0) {
+      document.querySelector('.total-section').style.display = 'block';
+    }
+    function displayCart() {
+      const cartContainer = document.getElementById('cart-items');
+      let total = 0;
+      cartContainer.innerHTML = '';
+
+      cartItems.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+        itemDiv.innerHTML = `
+          <div class="item-details">
+            <div class="item-name">${item.name}</div>
+            <div class="item-quantity">Quantity: ${item.quantity}</div>
+            <div class="item-price">Price: ₹${item.price}</div>
+          </div>
+          <div class="item-total">₹${itemTotal}</div>
+        `;
+        cartContainer.appendChild(itemDiv);
+      });
+
+      document.getElementById('total-amount').textContent = total;
+    }
+
+    function goBack() 
+    {
+      window.location.href = "menu.html"; 
+    }
+
+    function goToSection() 
+    {
+      const section = document.getElementById("section-select").value;
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      window.location.href = section;
+    }
+
+    function proceedToBilling() 
+    {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      window.location.href = "payment.html"; 
+    }
+
+    function clearCart() 
+    {
+      localStorage.removeItem('cart');
+      location.reload(); 
+    }
+
+    displayCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Thank You For Your Order</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9f5f0; 
+            background-image: url('thanku.avif'); 
+            background-size: 1500px 800px; 
+        }
+
+        .thank-you-heading {
+            color: #8B4513;
+        }
+
+        .home-button {
+            background-color: #8B4513; 
+            color: white;
+        }
+
+        .home-button:hover {
+            background-color: #A0522D; 
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center p-4">
+    <div class="bg-white rounded-lg shadow-xl p-6 max-w-md w-full text-center">
+        <h1 class="text-2xl font-semibold thank-you-heading mb-4">Thank You!</h1>
+        <p class="text-gray-700 mb-6">Your order has been placed successfully.</p>
+        <a href="project.html" class="home-button font-semibold py-2.5 px-5 rounded-full transition duration-300 ease-in-out inline-block">
+            Go to Homepage
+        </a>
+    </div>
+</body>
+</html>

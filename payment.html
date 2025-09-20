@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online Payment</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: 'Segoe UI', sans-serif;
+    text-transform: capitalize;
+    transition: all 0.2s linear;
+}
+
+body
+{
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+}
+
+.container form {
+    width: 700px;
+    padding: 20px;
+    background: #b7a89c;
+    box-shadow: 5px 5px 30px rgba(0.25, 0.25, 0.25, 0.25);
+}
+
+.container form .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.container form .row .col {
+    flex: 1 1 250px;
+}
+
+.col .title {
+    font-size: 20px;
+    color: #3E2723;
+    padding-bottom: 5px;
+}
+
+.col .inputBox {
+    margin: 15px 0;
+}
+
+.col .inputBox label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.col .inputBox input,
+.col .inputBox select {
+    width: 100%;
+    border: 1px solid #3E2723;
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+input[type="email"] {
+    text-transform: lowercase;
+}
+
+input[type="email"]::placeholder {
+    text-transform: none;
+}
+
+.col .inputBox input:focus,
+.col .inputBox select:focus {
+    border: 1px solid #000;
+}
+
+.col .flex {
+    display: flex;
+    gap: 15px;
+}
+
+.col .flex .inputBox {
+    flex: 1 1;
+    margin-top: 5px;
+}
+
+.col .inputBox img {
+    height: 34px;
+    margin-top: 5px;
+    filter: drop-shadow(0 0 1px #000);
+}
+
+.container form .submit_btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background: #46260d;
+    color: #fff;
+    margin-top: 5px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    display: none;
+}
+
+.payment-icons
+{
+   display: flex;
+   align-items: center;
+}
+
+.payment-icons img
+{
+   height: 30px; 
+   margin-right: 10px; 
+}
+</style>
+</head>
+<body>
+<div class = "container">
+  <form id="paymentForm" action="thanku.html">
+    <div class = "row">
+      <div class = "col">
+        <h3 class="title">
+          Billing Address</h3>
+            <div class="inputBox">
+              <label for="name">
+                Full Name: </label>
+                <input type="text" id="name"
+                       placeholder="Enter your full name"
+                       required>
+            </div>
+            <div class="inputBox">
+              <label for="email">
+                Email:
+              </label>
+              <input type="email" id="email" placeholder="Enter Email Address" required onblur="this.value = this.value.toLowerCase();">
+            </div>
+            <div class="inputBox">
+              <label for="address">
+                Address:
+              </label>
+              <input type="text" id="address"
+                     placeholder="Enter address"
+                     required>
+            </div>
+            <div class="inputBox">
+              <label for="city">
+                City:
+              </label>
+              <input type="text" id="city"
+                     placeholder="Enter city"
+                     required>
+            </div>
+            <div class="flex">
+              <div class="inputBox">
+                <label for="state">
+                  State:
+                </label>
+                <input type="text" id="state"
+                       placeholder="Enter state"
+                       required>
+              </div>
+      <div class="inputBox">
+                <label for="zip">
+                  Zip Code:
+                </label>
+                <input type="number" id="zip"
+                       placeholder="123456"
+                       required>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col">
+            <h3 class="title">Payment</h3>
+            <div class="payment-icons">
+              <img src="https://cdn-icons-png.flaticon.com/128/349/349228.png" alt="American Express">
+      <img src="https://cdn-icons-png.flaticon.com/128/196/196561.png" alt="Mastercard">
+              <img src="https://cdn-icons-png.flaticon.com/128/196/196566.png" alt="Paypal">
+              <img src="visa.png" alt="Visa">
+            </div>
+            <div class="inputBox">
+              <label for="name">
+                Card Information:
+              </label>
+            </div>
+            <div class="inputBox">
+              <label for="cardName">
+                Name On Card:
+              </label>
+              <input type="text" id="cardName"
+                     placeholder="Enter card name"
+                     required>
+            </div>
+            <div class="inputBox">
+              <label for="cardNum">
+                Credit Card Number:
+              </label>
+              <input type="tel" id="cardNum" placeholder="1111-2222-3333-4444" required>
+            </div>
+
+            <div class="inputBox">
+              <label for="">Exp Month:</label>
+              <select name="" id="expMonth">
+                <option value="Choose Month">Choose Month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
+            </div>
+            <div class="flex">
+              <div class="inputBox">
+                <label for="">Exp Year:</label>
+                <select name="" id="expYear">
+                  <option value="">Choose Year</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                </select>
+              </div>
+
+              <div class="inputBox">
+                <label for="cvv">CVV</label>
+                <input type="number" id="cvv"
+                       placeholder="1234" required>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <input type="submit" value="Buy Now" class="submit_btn">
+    </form>
+
+  </div>
+<script>
+    document.getElementById("paymentForm").addEventListener("submit", function(e) {
+    e.preventDefault(); 
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const address = document.getElementById("address").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const state = document.getElementById("state").value.trim();
+    const zip = document.getElementById("zip").value.trim();
+    const cardName = document.getElementById("cardName").value.trim();
+   const rawCardNumber = document.getElementById("cardNum").value.trim();
+    const expMonth = document.getElementById("expMonth").value;
+    const expYear = document.getElementById("expYear").value;
+    const cvv = document.getElementById("cvv").value.trim();
+
+    
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const zipPattern = /^\d{6}$/;
+    const cardNumberPattern = /^\d{16}$/;
+    const cvvPattern = /^\d{3,4}$/; 
+
+if (!cardNumberPattern.test(rawCardNumber)) {
+    if (/\D/.test(rawCardNumber)) {
+        alert("Credit card number must contain digits only (no letters or symbols).");
+    } else {
+        alert("Credit card number must be exactly 16 digits.");
+    }
+    return;
+}
+
+const cardNumber = rawCardNumber.replace(/\D/g, '');
+
+    if (name === "" || email === "" || address === "" || city === "" || state === "" || zip === ""
+        || cardName === "" || cardNumber === "" || cvv === "")
+    {
+        alert("All fields are required.");
+        return;
+    }
+
+    if (!emailPattern.test(email))
+    {
+    alert("Invalid email format.");
+    return;
+    }
+
+    if (!zipPattern.test(zip))
+    {
+    alert("Invalid ZIP code.");
+    return;
+    }
+
+    if (!cardNumberPattern.test(cardNumber))
+    {
+    alert("Invalid credit card number.");
+    return;
+    }
+
+
+
+    if (expMonth === "Choose Month" || expYear === "")
+    {
+    alert("Please select a valid expiration month and year.");
+    return;
+    }
+
+    if (!cvvPattern.test(cvv))
+    {
+    alert("Invalid CVV.");
+    return;
+    }
+
+    alert("Payment successful! Redirecting to thank you page...");
+    
+    window.location.href = "thanku.html";
+});
+</script>
+</body>
+</html>
