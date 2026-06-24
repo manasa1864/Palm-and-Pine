@@ -182,14 +182,15 @@
       document.getElementById('total-amount').textContent = total;
     }
 
-    function goBack() 
+    function goBack()
     {
-      window.location.href = "menu.html"; 
+      window.location.href = "project.html";
     }
 
-    function goToSection() 
+    function goToSection()
     {
       const section = document.getElementById("section-select").value;
+      if (!section) return;
       localStorage.setItem('cart', JSON.stringify(cartItems));
       window.location.href = section;
     }

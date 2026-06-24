@@ -285,16 +285,16 @@ input::-webkit-outer-spin-button {
     const cardNumberPattern = /^\d{16}$/;
     const cvvPattern = /^\d{3,4}$/; 
 
-if (!cardNumberPattern.test(rawCardNumber)) {
-    if (/\D/.test(rawCardNumber)) {
+const cardNumber = rawCardNumber.replace(/\D/g, '');
+
+if (!cardNumberPattern.test(cardNumber)) {
+    if (/[a-zA-Z]/.test(rawCardNumber)) {
         alert("Credit card number must contain digits only (no letters or symbols).");
     } else {
         alert("Credit card number must be exactly 16 digits.");
     }
     return;
 }
-
-const cardNumber = rawCardNumber.replace(/\D/g, '');
 
     if (name === "" || email === "" || address === "" || city === "" || state === "" || zip === ""
         || cardName === "" || cardNumber === "" || cvv === "")
