@@ -190,43 +190,7 @@
 
     .edit-textarea { height: 70px; resize: vertical; }
 
-    .admin-login {
-      text-align: center;
-      margin-top: 24px;
-      padding-bottom: 10px;
-    }
-
-    .admin-toggle {
-      color: #555;
-      font-size: 12px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .admin-toggle:hover { color: #a8763e; }
-
-    .admin-pw-input {
-      padding: 7px 12px;
-      border-radius: 5px;
-      border: none;
-      background-color: #281e16;
-      color: white;
-      font-size: 13px;
-      margin-right: 8px;
-    }
-
-    .btn-admin-login {
-      background-color: #a8763e;
-      color: white;
-      border: none;
-      padding: 7px 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 13px;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    footer {
+footer {
       background-color: #0d1010;
       color: #a8763e;
       text-align: left;
@@ -310,7 +274,7 @@
         <div v-else>
           <div style="display:flex; justify-content:space-between; align-items:flex-start;">
             <h3>{{ review.name }}</h3>
-            <div v-if="isAdmin" class="admin-actions">
+            <div class="admin-actions">
               <button class="btn-edit" @click="startEdit(review)">Edit</button>
               <button class="btn-delete" @click="deleteReview(review.id)">Delete</button>
             </div>
@@ -337,17 +301,6 @@
         <p class="success-msg" v-if="submitted">Thank you for your review!</p>
       </div>
 
-      <div class="admin-login" v-if="!isAdmin">
-        <span @click="showAdminInput = !showAdminInput" class="admin-toggle">🔒 Admin</span>
-        <div v-if="showAdminInput" style="margin-top:8px;">
-          <input type="password" v-model="adminInput" placeholder="Enter admin password" class="admin-pw-input" @keyup.enter="loginAdmin" />
-          <button class="btn-admin-login" @click="loginAdmin">Login</button>
-        </div>
-      </div>
-      <div class="admin-login" v-else>
-        <span style="color:#a8763e; font-size:13px;">🔓 Admin mode on &nbsp;</span>
-        <span @click="isAdmin = false" style="color:#888; font-size:12px; cursor:pointer;">Log out</span>
-      </div>
 
     </div>
   </div>
@@ -397,7 +350,6 @@
 
   <script>
     const { createApp } = Vue
-    const ADMIN_PASSWORD = 'palmadmin'
 
     createApp({
       data() {
@@ -405,9 +357,6 @@
           reviews: JSON.parse(localStorage.getItem('palmReviews')) || [],
           form: { name: '', rating: 1, text: '' },
           submitted: false,
-          isAdmin: false,
-          showAdminInput: false,
-          adminInput: '',
           editingId: null,
           editForm: { name: '', rating: 1, text: '' }
         }
@@ -434,16 +383,6 @@
           this.form = { name: '', rating: 1, text: '' }
           this.submitted = true
           setTimeout(() => { this.submitted = false }, 3000)
-        },
-        loginAdmin() {
-          if (this.adminInput === ADMIN_PASSWORD) {
-            this.isAdmin = true
-            this.showAdminInput = false
-            this.adminInput = ''
-          } else {
-            alert('Incorrect password.')
-            this.adminInput = ''
-          }
         },
         deleteReview(id) {
           if (!confirm('Delete this review?')) return
