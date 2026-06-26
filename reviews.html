@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<head>
+  <title>Palm and Pine | Reviews</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://media.istockphoto.com/id/539199982/photo/blur-dark-bar-or-cafe-at-night.jpg?s=612x612&w=0&k=20&c=W_MlPP3u4OHCDbYy5MZLym4qlQRU-wRFSUddc-GfMDs=');
+      background-size: cover;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0d1010;
+      padding: 10px 20px;
+      height: 60px;
+      margin: 0;
+    }
+
+    .navbar ul {
+      margin-top: 10px;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: white;
+      color: #4E342E;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #a8763e;
+      font-family: fantasy;
+      margin-top: 30px;
+    }
+
+    .reviews-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .review-card {
+      display: flex;
+      flex-direction: column;
+      background-color: #6f1a07;
+      opacity: 0.9;
+      border: 1px solid #0d1010;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .review-card h3 {
+      margin: 0 0 6px;
+      color: #f1c942;
+    }
+
+    .stars {
+      font-size: 20px;
+      margin-bottom: 8px;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .review-form {
+      background-color: #281e16;
+      border-radius: 10px;
+      padding: 22px 25px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    .review-form h2 {
+      color: #a8763e;
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .review-form input,
+    .review-form textarea {
+      width: 95%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 5px;
+      border: none;
+      background-color: #3a2a1e;
+      color: white;
+      font-size: 14px;
+      font-family: 'Segoe UI', sans-serif;
+      display: block;
+    }
+
+    .review-form textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    .review-form input::placeholder,
+    .review-form textarea::placeholder {
+      color: #aaa;
+    }
+
+    .star-picker {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .star-picker span {
+      font-size: 30px;
+      cursor: pointer;
+      color: #555;
+      transition: color 0.15s;
+      line-height: 1;
+    }
+
+    .star-picker span.lit {
+      color: #FFD700;
+    }
+
+    .review-form button {
+      background-color: #a8763e;
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .review-form button:hover {
+      background-color: #6f1a07;
+    }
+
+    .success-msg {
+      color: #a8763e;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-edit, .btn-delete, .btn-save, .btn-cancel {
+      border: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .btn-edit   { background-color: #a8763e; color: white; }
+    .btn-delete { background-color: #6f1a07; color: white; }
+    .btn-save   { background-color: #2e7d32; color: white; }
+    .btn-cancel { background-color: #555; color: white; }
+
+    .edit-input {
+      width: 100%;
+      background-color: #281e16;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 8px;
+      margin-bottom: 8px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    .edit-textarea { height: 70px; resize: vertical; }
+
+    .admin-login {
+      text-align: center;
+      margin-top: 24px;
+      padding-bottom: 10px;
+    }
+
+    .admin-toggle {
+      color: #555;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .admin-toggle:hover { color: #a8763e; }
+
+    .admin-pw-input {
+      padding: 7px 12px;
+      border-radius: 5px;
+      border: none;
+      background-color: #281e16;
+      color: white;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+
+    .btn-admin-login {
+      background-color: #a8763e;
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    footer {
+      background-color: #0d1010;
+      color: #a8763e;
+      text-align: left;
+      padding: 30px;
+      margin-top: 50px;
+      width: 95.5%;
+      bottom: 0;
+      background: linear-gradient(to right, #0d1010, #4E342E);
+      border-top-left-radius: 100px;
+    }
+
+    .f1 {
+      width: 85%;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .f2 { flex-basis: 25%; padding: 10px; }
+
+    .f3 {
+      flex-basis: 25%;
+      padding: 10px;
+      text-align: left;
+      flex: 1;
+      padding-left: 20px;
+    }
+
+    .f4 {
+      flex: 2;
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .f4 h3 { flex: 1; margin-bottom: 10px; }
+
+    footer a { color: #f1c942; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div>
+      <a href="project.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="menu-search.html">Menu Search</a>
+      <a href="#footer">Contact</a>
+      <a href="login&amp;signup.html">Sign Up</a>
+    </div>
+  </nav>
+
+  <h1>Customer Reviews</h1>
+
+  <div id="app">
+    <div class="reviews-wrapper">
+
+      <p v-if="reviews.length === 0" style="text-align:center; color:#a8763e; margin-bottom:20px;">No reviews yet. Be the first to leave one!</p>
+
+      <div class="review-card" v-for="review in reviews" :key="review.id">
+
+        <div v-if="editingId === review.id">
+          <input type="text" v-model="editForm.name" class="edit-input" />
+          <div class="star-picker">
+            <span
+              v-for="n in 5"
+              :key="n"
+              :class="{ lit: n <= editForm.rating }"
+              @click="editForm.rating = n"
+            >★</span>
+          </div>
+          <textarea v-model="editForm.text" class="edit-input edit-textarea"></textarea>
+          <div class="admin-actions">
+            <button class="btn-save" @click="saveEdit">Save</button>
+            <button class="btn-cancel" @click="cancelEdit">Cancel</button>
+          </div>
+        </div>
+
+        <div v-else>
+          <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+            <h3>{{ review.name }}</h3>
+            <div v-if="isAdmin" class="admin-actions">
+              <button class="btn-edit" @click="startEdit(review)">Edit</button>
+              <button class="btn-delete" @click="deleteReview(review.id)">Delete</button>
+            </div>
+          </div>
+          <div class="stars">{{ starString(review.rating) }}</div>
+          <p class="review-text">{{ review.text }}</p>
+        </div>
+
+      </div>
+
+      <div class="review-form">
+        <h2>Leave a Review</h2>
+        <input type="text" v-model="form.name" placeholder="Your name" />
+        <div class="star-picker">
+          <span
+            v-for="n in 5"
+            :key="n"
+            :class="{ lit: n <= form.rating }"
+            @click="form.rating = n"
+          >★</span>
+        </div>
+        <textarea v-model="form.text" placeholder="Share your experience..."></textarea>
+        <button @click="submit">Submit Review</button>
+        <p class="success-msg" v-if="submitted">Thank you for your review!</p>
+      </div>
+
+      <div class="admin-login" v-if="!isAdmin">
+        <span @click="showAdminInput = !showAdminInput" class="admin-toggle">🔒 Admin</span>
+        <div v-if="showAdminInput" style="margin-top:8px;">
+          <input type="password" v-model="adminInput" placeholder="Enter admin password" class="admin-pw-input" @keyup.enter="loginAdmin" />
+          <button class="btn-admin-login" @click="loginAdmin">Login</button>
+        </div>
+      </div>
+      <div class="admin-login" v-else>
+        <span style="color:#a8763e; font-size:13px;">🔓 Admin mode on &nbsp;</span>
+        <span @click="isAdmin = false" style="color:#888; font-size:12px; cursor:pointer;">Log out</span>
+      </div>
+
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="f1">
+      <div class="f2">
+        <img src="restaurant.jpg" class="restaurant" width="200" height="200">
+        <h3>Creator</h3>
+        <p>Creator: Manasa Gopisetty</p>
+        <p>Contact: 8369010115</p>
+        <p>Email: <a href="mailto:manasagopisetty4@gmail.com">manasagopisetty4@gmail.com</a></p>
+      </div>
+      <div class="f3">
+        <ul>
+          <h3>&nbsp;&nbsp;&nbsp;&nbsp;Our Outlets</h3><br>
+          <li>Nakshatra Mall, Matunga</li><br>
+          <li>Oberoi Mall, Goregaon</li><br>
+          <li>Infiniti Mall, Malad</li><br>
+          <li>Korum Mall, Thane</li><br>
+          <li>Versova</li><br>
+          <li>R City Mall, Ghatkopar</li><br>
+          <li>Vashi</li><br>
+          <li>R Mall, Mulund</li><br>
+        </ul>
+      </div>
+      <div class="f4">
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Follow Us</h3><br>
+        <ul>
+          <li>Instagram - <a href="https://www.instagram.com" target="_blank">@pine&palmtreats</a></li><br>
+          <li>Facebook - <a href="https://www.facebook.com" target="_blank">@pine&palmbites</a></li><br>
+          <li>Twitter - <a href="https://twitter.com" target="_blank">@pine&palm_official</a></li><br>
+          <li>LinkedIn - <a href="https://www.linkedin.com" target="_blank">@pine&palm_restaurants</a></li><br>
+        </ul>
+      </div>
+      <div class="f5">
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opening Timings</h3>
+        <ul>
+          <li>Monday to Friday: 11:00 AM - 11:00 PM</li><br>
+          <li>Saturday and Sunday: 10:00 AM - 12:00 AM</li><br>
+          <li>Holidays: 10:00 AM - 12:00 AM</li><br>
+          <li>Last Order: 11:30 PM</li><br>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const { createApp } = Vue
+    const ADMIN_PASSWORD = 'palmadmin'
+
+    createApp({
+      data() {
+        return {
+          reviews: JSON.parse(localStorage.getItem('palmReviews')) || [],
+          form: { name: '', rating: 1, text: '' },
+          submitted: false,
+          isAdmin: false,
+          showAdminInput: false,
+          adminInput: '',
+          editingId: null,
+          editForm: { name: '', rating: 1, text: '' }
+        }
+      },
+      methods: {
+        starString(rating) {
+          return '★'.repeat(rating) + '☆'.repeat(5 - rating)
+        },
+        save() {
+          localStorage.setItem('palmReviews', JSON.stringify(this.reviews))
+        },
+        submit() {
+          if (!this.form.name.trim() || !this.form.text.trim()) {
+            alert('Please fill in all fields.')
+            return
+          }
+          this.reviews.push({
+            id: Date.now(),
+            name: this.form.name,
+            rating: this.form.rating,
+            text: this.form.text
+          })
+          this.save()
+          this.form = { name: '', rating: 1, text: '' }
+          this.submitted = true
+          setTimeout(() => { this.submitted = false }, 3000)
+        },
+        loginAdmin() {
+          if (this.adminInput === ADMIN_PASSWORD) {
+            this.isAdmin = true
+            this.showAdminInput = false
+            this.adminInput = ''
+          } else {
+            alert('Incorrect password.')
+            this.adminInput = ''
+          }
+        },
+        deleteReview(id) {
+          if (!confirm('Delete this review?')) return
+          this.reviews = this.reviews.filter(r => r.id !== id)
+          this.save()
+        },
+        startEdit(review) {
+          this.editingId = review.id
+          this.editForm = { name: review.name, rating: review.rating, text: review.text }
+        },
+        saveEdit() {
+          const r = this.reviews.find(r => r.id === this.editingId)
+          if (r) {
+            r.name = this.editForm.name
+            r.rating = this.editForm.rating
+            r.text = this.editForm.text
+          }
+          this.save()
+          this.editingId = null
+        },
+        cancelEdit() {
+          this.editingId = null
+        }
+      }
+    }).mount('#app')
+  </script>
+
+</body>
+</html>

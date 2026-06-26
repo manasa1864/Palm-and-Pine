@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<head>
+  <title>Palm and Pine | Menu Search</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://media.istockphoto.com/id/539199982/photo/blur-dark-bar-or-cafe-at-night.jpg?s=612x612&w=0&k=20&c=W_MlPP3u4OHCDbYy5MZLym4qlQRU-wRFSUddc-GfMDs=');
+      background-size: cover;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0d1010;
+      padding: 10px 20px;
+      height: 60px;
+      margin: 0;
+    }
+
+    .navbar ul {
+      margin-top: 10px;
+    }
+
+    .navbar a {
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .navbar a:hover {
+      background-color: white;
+      color: #4E342E;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #a8763e;
+      font-family: fantasy;
+      margin-top: 30px;
+    }
+
+    .search-section {
+      max-width: 650px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      background-color: #281e16;
+      color: white;
+      font-size: 15px;
+      font-family: 'Segoe UI', sans-serif;
+      box-sizing: border-box;
+      margin-bottom: 14px;
+    }
+
+    .search-input::placeholder {
+      color: #aaa;
+    }
+
+    .cat-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .cat-btn {
+      background-color: #281e16;
+      color: white;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .cat-btn:hover {
+      background-color: #6f1a07;
+    }
+
+    .cat-btn.active {
+      background-color: #a8763e;
+    }
+
+    .menu-list {
+      max-width: 650px;
+      margin: 0 auto;
+      padding: 0 20px 30px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      background-color: #6f1a07;
+      opacity: 0.9;
+      border: 1px solid #0d1010;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .item-details h3 {
+      margin: 0 0 4px;
+    }
+
+    .item-details p {
+      margin: 0 0 6px;
+      font-size: 14px;
+    }
+
+    .cat-tag {
+      background-color: #281e16;
+      color: #a8763e;
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #a8763e;
+      font-size: 16px;
+      margin-top: 30px;
+    }
+
+    footer {
+      background-color: #0d1010;
+      color: #a8763e;
+      text-align: left;
+      padding: 30px;
+      margin-top: 50px;
+      width: 95.5%;
+      bottom: 0;
+      background: linear-gradient(to right, #0d1010, #4E342E);
+      border-top-left-radius: 100px;
+    }
+
+    .f1 {
+      width: 85%;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .f2 { flex-basis: 25%; padding: 10px; }
+
+    .f3 {
+      flex-basis: 25%;
+      padding: 10px;
+      text-align: left;
+      flex: 1;
+      padding-left: 20px;
+    }
+
+    .f4 {
+      flex: 2;
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .f4 h3 { flex: 1; margin-bottom: 10px; }
+
+    footer a { color: #f1c942; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div>
+      <a href="project.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="#footer">Contact</a>
+      <a href="login&amp;signup.html">Sign Up</a>
+    </div>
+  </nav>
+
+  <h1>Search the Menu</h1>
+  <div id="root"></div>
+
+  <footer id="footer">
+    <div class="f1">
+      <div class="f2">
+        <img src="restaurant.jpg" class="restaurant" width="200" height="200">
+        <h3>Creator</h3>
+        <p>Creator: Manasa Gopisetty</p>
+        <p>Contact: 8369010115</p>
+        <p>Email: <a href="mailto:manasagopisetty4@gmail.com">manasagopisetty4@gmail.com</a></p>
+      </div>
+      <div class="f3">
+        <ul>
+          <h3>&nbsp;&nbsp;&nbsp;&nbsp;Our Outlets</h3><br>
+          <li>Nakshatra Mall, Matunga</li><br>
+          <li>Oberoi Mall, Goregaon</li><br>
+          <li>Infiniti Mall, Malad</li><br>
+          <li>Korum Mall, Thane</li><br>
+          <li>Versova</li><br>
+          <li>R City Mall, Ghatkopar</li><br>
+          <li>Vashi</li><br>
+          <li>R Mall, Mulund</li><br>
+        </ul>
+      </div>
+      <div class="f4">
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Follow Us</h3><br>
+        <ul>
+          <li>Instagram - <a href="https://www.instagram.com" target="_blank">@pine&palmtreats</a></li><br>
+          <li>Facebook - <a href="https://www.facebook.com" target="_blank">@pine&palmbites</a></li><br>
+          <li>Twitter - <a href="https://twitter.com" target="_blank">@pine&palm_official</a></li><br>
+          <li>LinkedIn - <a href="https://www.linkedin.com" target="_blank">@pine&palm_restaurants</a></li><br>
+        </ul>
+      </div>
+      <div class="f5">
+        <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opening Timings</h3>
+        <ul>
+          <li>Monday to Friday: 11:00 AM - 11:00 PM</li><br>
+          <li>Saturday and Sunday: 10:00 AM - 12:00 AM</li><br>
+          <li>Holidays: 10:00 AM - 12:00 AM</li><br>
+          <li>Last Order: 11:30 PM</li><br>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const h = React.createElement
+    const { useState } = React
+
+    const allItems = [
+      { name: 'Hara Bhara Kebab',          price: 200,  category: 'Starters',      description: 'Spinach and green pea patties, shallow-fried' },
+      { name: 'Paneer Tikka',               price: 150,  category: 'Starters',      description: 'Marinated cottage cheese cubes grilled in a tandoor' },
+      { name: 'Paneer 65',                  price: 130,  category: 'Starters',      description: 'South Indian style spicy fried paneer' },
+      { name: 'Dahi Kebab',                 price: 250,  category: 'Starters',      description: 'Hung curd-based patties with spices, soft and creamy inside' },
+      { name: 'Salted Lassi',               price: 109,  category: 'Drinks',        description: 'A savory version of lassi, spiced with roasted cumin and salt' },
+      { name: 'Nimbu Pani',                 price: 56,   category: 'Drinks',        description: 'Indian-style lemonade with lemon, salt, sugar, and a dash of spice' },
+      { name: 'Sula Chenin Blanc',          price: 875,  category: 'Drinks',        description: 'Light, fruity Indian white wine with tropical notes' },
+      { name: 'Mojito',                     price: 599,  category: 'Drinks',        description: 'A minty, limey rum cocktail topped with soda' },
+      { name: 'Butter Chicken',             price: 330,  category: 'Indian',        description: 'Mild, buttery, and irresistibly smooth chicken curry' },
+      { name: 'Palak Paneer',               price: 108,  category: 'Indian',        description: 'Spinach gravy loaded with soft cottage cheese cubes' },
+      { name: 'Fish Curry',                 price: 500,  category: 'Indian',        description: 'Coastal-style fish simmered in a tangy, spicy sauce' },
+      { name: 'Paneer Butter Masala',       price: 124,  category: 'Indian',        description: 'Creamy tomato gravy with soft cubes of paneer' },
+      { name: 'Spaghetti Bolognese',        price: 990,  category: 'International', description: 'Classic Italian spaghetti in a hearty meat sauce' },
+      { name: 'Grilled Chicken with Herbs', price: 1200, category: 'International', description: 'Juicy grilled chicken seasoned with aromatic herbs' },
+      { name: 'Chicken Stroganoff',         price: 670,  category: 'International', description: 'Creamy mushroom sauce served with chicken and rice or pasta' },
+      { name: 'Garlic Bread with Cheese',   price: 100,  category: 'International', description: 'Toasted baguette slices loaded with melted cheese' },
+      { name: 'Gulab Jamun',                price: 225,  category: 'Desserts',      description: 'Deep-fried milk dumplings soaked in warm sugar syrup' },
+      { name: 'Rasgulla',                   price: 230,  category: 'Desserts',      description: 'Spongy cottage cheese balls in a light sugary syrup' },
+      { name: 'Apple Pie',                  price: 1600, category: 'Desserts',      description: 'Baked pastry filled with spiced apples and a golden crust' },
+      { name: 'Ice Cream Sundae',           price: 330,  category: 'Desserts',      description: 'Scoops of ice cream topped with sauces, nuts, and a cherry' },
+      { name: 'Green Salad',                price: 240,  category: 'Sides',         description: 'Lettuce, spinach, and arugula with a dressing' },
+      { name: 'Garlic Bread',               price: 150,  category: 'Sides',         description: 'Bread brushed with garlic butter and baked or grilled' },
+      { name: 'Onion Rings',                price: 170,  category: 'Sides',         description: 'Sliced onions battered and deep-fried until crispy' },
+      { name: 'Caesar Salad',               price: 1300, category: 'Sides',         description: 'Romaine lettuce and croutons with Parmesan, lemon juice, and olive oil' },
+    ]
+
+    const categories = ['All', 'Starters', 'Drinks', 'Indian', 'International', 'Desserts', 'Sides']
+
+    function MenuSearch() {
+      const [query, setQuery] = useState('')
+      const [activeCat, setActiveCat] = useState('All')
+
+      const filtered = allItems.filter(function(item) {
+        const matchQuery = item.name.toLowerCase().includes(query.toLowerCase()) ||
+                           item.description.toLowerCase().includes(query.toLowerCase())
+        const matchCat = activeCat === 'All' || item.category === activeCat
+        return matchQuery && matchCat
+      })
+
+      return h('div', null,
+        h('div', { className: 'search-section' },
+          h('input', {
+            className: 'search-input',
+            type: 'text',
+            placeholder: 'Search for dishes, drinks...',
+            value: query,
+            onChange: function(e) { setQuery(e.target.value) }
+          }),
+          h('div', { className: 'cat-buttons' },
+            categories.map(function(cat) {
+              return h('button', {
+                key: cat,
+                className: 'cat-btn' + (activeCat === cat ? ' active' : ''),
+                onClick: function() { setActiveCat(cat) }
+              }, cat)
+            })
+          )
+        ),
+        h('div', { className: 'menu-list' },
+          filtered.length === 0
+            ? h('p', { className: 'no-results' }, 'No items found for "' + query + '"')
+            : filtered.map(function(item) {
+                return h('div', { className: 'menu-item', key: item.name },
+                  h('div', { className: 'item-details' },
+                    h('h3', null, item.name),
+                    h('p', null, 'Rs.' + item.price),
+                    h('p', null, item.description),
+                    h('span', { className: 'cat-tag' }, item.category)
+                  )
+                )
+              })
+        )
+      )
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(h(MenuSearch, null))
+  </script>
+
+</body>
+</html>

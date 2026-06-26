@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url('https://media.istockphoto.com/id/539199982/photo/blur-dark-bar-or-cafe-at-night.jpg?s=612x612&w=0&k=20&c=W_MlPP3u4OHCDbYy5MZLym4qlQRU-wRFSUddc-GfMDs=');
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+  min-height: 100vh;
+}
